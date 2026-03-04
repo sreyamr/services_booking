@@ -19,6 +19,7 @@ class AuthAuthenticated extends AuthState {
   List<Object?> get props => [user];
 }
 
+class AuthSignupSuccess extends AuthState {}
 class AuthUnauthenticated extends AuthState {}
 
 class AuthFailure extends AuthState {

@@ -73,7 +73,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         password: e.password,
       );
 
-      emit(AuthUnauthenticated());
+      emit(AuthSignupSuccess());
 
     } on FirebaseAuthException catch (ex) {
       String message;

@@ -99,10 +99,12 @@ class _LoginPageState extends State<LoginPage> {
                     },
                   ),
 
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 30),
                   Center(
                     child: TextButton(
-                      onPressed: () => context.go(AppRoutes.signup),
+                      onPressed: () {
+                        context.go(AppRoutes.signup);
+                      },
                       child: const Text("Don't have account? Sign up"),
                     ),
                   ),

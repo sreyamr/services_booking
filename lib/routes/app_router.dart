@@ -29,7 +29,9 @@ class AppRouter {
 
         final onSplash = state.matchedLocation == AppRoutes.splash;
         final onLogin = state.matchedLocation == AppRoutes.login;
+        final onSignup = state.matchedLocation == AppRoutes.signup;
 
+        // Splash logic
         if (onSplash) {
           if (authState is AuthAuthenticated) {
             return authState.user.role == 'admin'
@@ -39,17 +41,19 @@ class AppRouter {
           if (authState is AuthUnauthenticated) return AppRoutes.login;
         }
 
-        if (authState is AuthAuthenticated && onLogin) {
+        // Authenticated users should not go to login or signup
+        if (authState is AuthAuthenticated && (onLogin || onSignup)) {
           return authState.user.role == 'admin'
               ? AppRoutes.adminAppointments
               : AppRoutes.home;
         }
 
-        if (authState is AuthUnauthenticated && !onLogin) {
+        // Unauthenticated users should not be redirected from signup
+        if (authState is AuthUnauthenticated && !onLogin && !onSignup) {
           return AppRoutes.login;
         }
 
-        return null;
+        return null; // no redirect
       },
       routes: [
 

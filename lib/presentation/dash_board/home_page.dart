@@ -147,6 +147,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: BlocBuilder<HomeBloc, HomeState>(
         builder: (context, state) {
+          final name = state.userName ?? "Guest";
           return CustomScrollView(
             controller: _scrollController,
             slivers: [
@@ -288,7 +289,7 @@ class _HomePageState extends State<HomePage> {
                           onTap: () {
                             context.push(
                               AppRoutes.details,
-                              extra: ProviderDetailArgs(provider: p, userName: "JohnDoe"),
+                              extra: ProviderDetailArgs(provider: p, userName:name),
                             );
                           },
                           child: Container(

@@ -27,7 +27,6 @@ class _SignupPageState extends State<SignupPage> {
   final confirmCtrl = TextEditingController();
 
 
-  final _formKey = GlobalKey<FormState>();
   bool isFormValid = false;
 
 
@@ -40,7 +39,7 @@ class _SignupPageState extends State<SignupPage> {
           padding: const EdgeInsets.all(20),
           child: BlocConsumer<AuthBloc, AuthState>(
             listener: (context, state) {
-              if (state is AuthAuthenticated) {
+              if (state is AuthSignupSuccess) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text('Signup successful!')),
                 );
@@ -49,13 +48,12 @@ class _SignupPageState extends State<SignupPage> {
                   context.go(AppRoutes.login);
                 });
               }
+
               if (state is AuthFailure) {
-                ScaffoldMessenger.of(context)
-                    .showSnackBar(SnackBar(content: Text(state.message)));
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text(state.message)),
+                );
               }
-              // if (state is AuthAuthenticated) {
-              //   context.go(AppRoutes.login);
-              // }
             },
             builder: (context, state) {
               return  Column(
